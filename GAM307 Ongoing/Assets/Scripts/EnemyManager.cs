@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyManager : MonoBehaviour {
+public class EnemyManager : Singleton<EnemyManager> {
     /*
      * Use a coroutine to spawn an enemy at random location 
      * in the game world every second
@@ -10,14 +10,28 @@ public class EnemyManager : MonoBehaviour {
      * Spawn a random enemy as above
      * 
      */
+    public static EnemyManager instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    public int enemyCount;
+
 
     public GameObject[] enemies;
-    int maxEnemyCount = 10;
-    int currentEnemyCount;
+    //int maxEnemyCount = 10;
+    //int currentEnemyCount;
+
     // Use this for initialization
-    void Start () {
-        StartCoroutine(SpawnEnemy());
-        currentEnemyCount = 0;
+    void Start ()
+    {
+        //StartCoroutine(SpawnEnemy());
+        //currentEnemyCount = 0;
+
+        SpawnEnemy();
+
 	}
 	
 	// Update is called once per frame
@@ -25,6 +39,19 @@ public class EnemyManager : MonoBehaviour {
 		
 	}
 
+    public void SpawnEnemy()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            Vector3 spawnPos = new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10));
+
+            int rnd = Random.Range(0, 3);
+            Instantiate(enemies[Random.Range(0, enemies.Length)], spawnPos, transform.rotation);
+        }
+
+    }
+
+    /*
     IEnumerator SpawnEnemy()
     {
         while (currentEnemyCount < maxEnemyCount)
@@ -42,5 +69,5 @@ public class EnemyManager : MonoBehaviour {
             StartCoroutine(SpawnEnemy());
         else
             StopCoroutine(SpawnEnemy());
-            */
+          */
 }
