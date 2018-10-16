@@ -70,4 +70,20 @@ public class EnemyManager : Singleton<EnemyManager> {
         else
             StopCoroutine(SpawnEnemy());
           */
+
+    private void OnEnable()
+    {
+        GameEvents.OnEnemyDie += OnEnemyDie;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.OnEnemyDie -= OnEnemyDie;
+    }
+
+    void OnEnemyDie()
+    {
+        enemyCount--;
+        SpawnEnemy();
+    }
 }

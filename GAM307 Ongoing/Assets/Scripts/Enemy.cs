@@ -20,10 +20,10 @@ public class Enemy : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        StartCoroutine(FadeMe());
+        StartCoroutine(Die());
     }
 
-    IEnumerator FadeMe()
+    IEnumerator Die()
     {
         yield return new WaitForSeconds(2);
 
@@ -34,10 +34,26 @@ public class Enemy : MonoBehaviour {
             GetComponent<Renderer>().material.color = c;
             yield return null;
         }
-        yield return new WaitForSeconds(1);
-        EnemyManager.instance.enemyCount--;
+
+        GameEvents.ReportOnEnemyDie();
+
+       // yield return new WaitForSeconds(1);
+       // EnemyManager.instance.enemyCount--;
         //EnemyManager.instance.SpawnEnemy++;
-        GameManager.instance.scoreTotal+= 100;
+        //GameManager.instance.+= 100;
         Destroy(this.gameObject);
+    }
+
+    private void OnEnable()
+    {
+        GameEvents.OnDifficultyChange += OnDifficultyChange;
+    }
+    private void OnDisable()
+    {
+        GameEvents.OnDifficultyChange -= OnDifficultyChange;
+    }
+    void OnDifficultyChange(Difficulty difficulty)
+    {
+        if (difficulty == Difficulty.EASY)
     }
 }
