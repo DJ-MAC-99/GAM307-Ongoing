@@ -22,9 +22,9 @@ GameObject:
   - component: {fileID: 33823103568528208}
   - component: {fileID: 23452018430184020}
   - component: {fileID: 136445183275431144}
-  - component: {fileID: 114726144795391324}
+  - component: {fileID: 114059530546059626}
   m_Layer: 0
-  m_Name: Enemy1
+  m_Name: Kobold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,7 +85,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1632053765520456}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114726144795391324
+--- !u!114 &114059530546059626
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,9 +93,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1632053765520456}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7ccdd138b8572e488406ce4bf2d4505, type: 3}
+  m_Script: {fileID: 11500000, guid: 4696bd8ad6d56c145a71e09511072a61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyType: 0
+  health: 0
+  speed: 0
+  scoreValue: 0
+  attack: 0
+  defence: 0
 --- !u!136 &136445183275431144
 CapsuleCollider:
   m_ObjectHideFlags: 1

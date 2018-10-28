@@ -8,13 +8,12 @@ public class UIManager : MonoBehaviour {
     public TextMeshProUGUI enemyCountText;
     public TextMeshProUGUI scoreText;
 
+    //Update is called once per frame
 
-    // Update is called once per frame
     //void Update()
     //{
-    //    enemyCountText.text = "Enemy Count" + " - " + EnemyManager.instance.enemyCount.ToString();
-    //    scoreText.text = "Score" + " - " + GameManager.instance.scoreTotal.ToString();
-
+    //    enemyCountText.text = "Enemy Count: <color=red>" + EnemyManager.instance.enemyCount.ToString();
+    //    scoreText.text = "Score: <color=green>" + GameManager.instance.score.ToString();
     //}
 
     private void OnEnable()
@@ -29,7 +28,8 @@ public class UIManager : MonoBehaviour {
 
     void OnEnemyDie()
     {
-        enemyCountText.text = "Enemy Count" + " - " + EnemyManager.instance.enemyCount.ToString();
-        scoreText.text = "Score" + " - " + GameManager.instance.scoreTotal.ToString();
+        scoreText.text = "Score: <color=green>" + GameManager.instance.score.ToString();
+        enemyCountText.text = "Enemy Count: <color=red>" + EnemyManager.instance.enemyCount.ToString();
     }
+
 }

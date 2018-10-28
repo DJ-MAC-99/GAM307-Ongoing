@@ -2,75 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyManager : Singleton<EnemyManager> {
-    /*
-     * Use a coroutine to spawn an enemy at random location 
-     * in the game world every second
-     * 
-     * Spawn a random enemy as above
-     * 
-     */
-    public static EnemyManager instance;
-
-    private void Awake()
-    {
-        instance = this;
-    }
-
+public class EnemyManager : Singleton<EnemyManager>
+{
     public int enemyCount;
 
-
+    // Declare variables to hold our enemy prefabs
     public GameObject[] enemies;
-    //int maxEnemyCount = 10;
-    //int currentEnemyCount;
-
-    // Use this for initialization
+    
     void Start ()
     {
-        //StartCoroutine(SpawnEnemy());
-        //currentEnemyCount = 0;
-
         SpawnEnemy();
-
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 
     public void SpawnEnemy()
     {
-        for (int i = 0; i < 5; i++)
+        int spawnNumber = 0;
+        if (GameManager.instance.difficulty == Difficulty.EASY)
+            spawnNumber = 1;
+        if (GameManager.instance.difficulty == Difficulty.MEDIUM)
+            spawnNumber = 2;
+        if (GameManager.instance.difficulty == Difficulty.HARD)
+            spawnNumber = 3;
+
+
+        for (int i = 0; i < spawnNumber; i++)
         {
+            //Get a random position
             Vector3 spawnPos = new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10));
 
-            int rnd = Random.Range(0, 3);
+            //Instantaite the (random) prefab at a random position
             Instantiate(enemies[Random.Range(0, enemies.Length)], spawnPos, transform.rotation);
         }
-
     }
-
-    /*
-    IEnumerator SpawnEnemy()
-    {
-        while (currentEnemyCount < maxEnemyCount)
-        {
-            Vector3 spawnPos = new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10));
-
-            int rnd = Random.Range(0, 3);
-            Instantiate(enemies[rnd], spawnPos, transform.rotation);
-
-            yield return new WaitForSeconds(2);
-        }
-    }
-
-           /* if (currentEnemyCount<maxEnemyCount)
-            StartCoroutine(SpawnEnemy());
-        else
-            StopCoroutine(SpawnEnemy());
-          */
-
+    
     private void OnEnable()
     {
         GameEvents.OnEnemyDie += OnEnemyDie;
@@ -86,4 +50,5 @@ public class EnemyManager : Singleton<EnemyManager> {
         enemyCount--;
         SpawnEnemy();
     }
+
 }
